@@ -1,6 +1,8 @@
+import jsPDF from 'jspdf';
+
 // Function to add another work experience section
 function addWorkExperience(): void {
-  const container = document.getElementById('work-experience-container')!;
+  const container = document.getElementById('work-experience-container') as HTMLElement;
   const newSection = document.createElement('div');
   newSection.className = 'work-experience';
   newSection.innerHTML = `
@@ -18,7 +20,7 @@ function addWorkExperience(): void {
 
 // Function to add another education section
 function addEducation(): void {
-  const container = document.getElementById('education-container')!;
+  const container = document.getElementById('education-container') as HTMLElement;
   const newSection = document.createElement('div');
   newSection.className = 'education';
   newSection.innerHTML = `
@@ -36,34 +38,46 @@ function addEducation(): void {
 document.getElementById('resume-builder')?.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  // Collect form data
   const formData = new FormData(event.target as HTMLFormElement);
 
-  // Build resume preview
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const phone = formData.get('phone') as string;
+
+  const jobTitles = Array.from(formData.getAll('jobTitle[]')) as string[];
+  const companies = Array.from(formData.getAll('company[]')) as string[];
+  const datesEmployed = Array.from(formData.getAll('datesEmployed[]')) as string[];
+  const descriptions = Array.from(formData.getAll('description[]')) as string[];
+
+  const degrees = Array.from(formData.getAll('degree[]')) as string[];
+  const institutions = Array.from(formData.getAll('institution[]')) as string[];
+  const datesAttended = Array.from(formData.getAll('datesAttended[]')) as string[];
+
+  const skills = formData.get('skills') as string;
+
   const previewDiv = document.getElementById('resume-preview')!;
   previewDiv.innerHTML = `
-    <h3>${formData.get('name')}</h3>
-    <p>${formData.get('email')} | ${formData.get('phone')}</p>
+    <h3>${name}</h3>
+    <p>${email} | ${phone}</p>
     <hr />
     <h4>Work Experience</h4>
     <ul>
-      ${[...formData.getAll('jobTitle[]')].map((title: string, i: number) => `
-        <li><strong>${title}</strong> at ${formData.getAll('company[]')[i]} (${formData.getAll('datesEmployed[]')[i]})<br />${formData.getAll('description[]')[i]}</li>
+      ${jobTitles.map((title, i) => `
+        <li><strong>${title}</strong> at ${companies[i]} (${datesEmployed[i]})<br />${descriptions[i]}</li>
       `).join('')}
     </ul>
     <hr />
     <h4>Education</h4>
     <ul>
-      ${[...formData.getAll('degree[]')].map((degree: string, i: number) => `
-        <li><strong>${degree}</strong> from ${formData.getAll('institution[]')[i]} (${formData.getAll('datesAttended[]')[i]})</li>
+      ${degrees.map((degree, i) => `
+        <li><strong>${degree}</strong> from ${institutions[i]} (${datesAttended[i]})</li>
       `).join('')}
     </ul>
     <hr />
     <h4>Skills</h4>
-    <p>${formData.get('skills')}</p>
+    <p>${skills}</p>
   `;
 
-  // Show preview section
   document.getElementById('preview')!.style.display = 'block';
 });
 
@@ -72,8 +86,8 @@ function downloadResume(): void {
   const resumeContent = document.getElementById('resume-preview')!.innerHTML;
   const pdf = new jsPDF();
   pdf.html(resumeContent, {
-    callback: (pdf) => {
-      pdf.save('resume.pdf');
+    callback: (pdfDoc: jsPDF) => {
+      pdfDoc.save('resume.pdf');
     },
   });
 }
