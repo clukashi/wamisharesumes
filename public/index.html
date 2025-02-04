@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wamisha Resumes.io</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Wamisha Resumes.io</h1>
+    <p>Create your professional resume in minutes!</p>
+  </header>
+
+  <main>
+    <section id="resume-form">
+      <h2>Build Your Resume</h2>
+      <form id="resume-builder">
+        <!-- Personal Details -->
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <!-- Work Experience -->
+        <h3>Work Experience</h3>
+        <div id="work-experience-container">
+          <div class="work-experience">
+            <label for="job-title">Job Title:</label>
+            <input type="text" name="jobTitle[]" required />
+            <label for="company">Company:</label>
+            <input type="text" name="company[]" required />
+            <label for="dates-employed">Dates Employed:</label>
+            <input type="text" name="datesEmployed[]" required />
+            <label for="description">Description:</label>
+            <textarea name="description[]" rows="3"></textarea>
+          </div>
+        </div>
+        <button type="button" onclick="addWorkExperience()">Add Another Job</button>
+
+        <!-- Education -->
+        <h3>Education</h3>
+        <div id="education-container">
+          <div class="education">
+            <label for="degree">Degree:</label>
+            <input type="text" name="degree[]" required />
+            <label for="institution">Institution:</label>
+            <input type="text" name="institution[]" required />
+            <label for="dates-attended">Dates Attended:</label>
+            <input type="text" name="datesAttended[]" required />
+          </div>
+        </div>
+        <button type="button" onclick="addEducation()">Add Another Degree</button>
+
+        <!-- Skills -->
+        <h3>Skills</h3>
+        <textarea name="skills" placeholder="Enter your skills separated by commas"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Generate Resume</button>
+      </form>
+    </section>
+
+    <section id="preview" style="display: none;">
+      <h2>Preview Your Resume</h2>
+      <div id="resume-preview"></div>
+      <button onclick="downloadResume()">Download Resume</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Wamisha Resumes.io</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
