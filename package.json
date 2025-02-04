@@ -1,7 +1,7 @@
 {
-  "name": "wamisha-resumes",
+  "name": "resume-builder",
   "version": "1.0.0",
-  "description": "AI-powered Resume Generator",
+  "description": "AI-powered Resume Builder",
   "main": "index.js",
   "scripts": {
     "build": "tsc"
@@ -10,9 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jspdf": "^2.5.1"
+    "jspdf": "^2.5.1",
+    "nodemailer": "^6.9.1",
+    "axios": "^1.4.0",       // Ensure this is present
+    "dotenv": "^16.3.1"      // Ensure this is present
   },
   "devDependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@types/nodemailer": "^6.4.4",
+    "@types/axios": "^1.5.5", // Ensure this is present
+    "@types/dotenv": "^16.0.4" // Ensure this is present
   }
 }
