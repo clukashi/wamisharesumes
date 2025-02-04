@@ -12,8 +12,8 @@
   "dependencies": {
     "jspdf": "^2.5.1",
     "nodemailer": "^6.9.1",
-    "axios": "^1.4.0",       // Ensure this is present
-    "dotenv": "^16.3.1"      // Ensure this is present
+    "axios": "^1.4.0",       
+    "dotenv": "^16.3.1"      
   },
   "devDependencies": {
     "typescript": "^5.2.2",
